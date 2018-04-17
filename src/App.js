@@ -32,12 +32,10 @@ class App extends Component {
   }
 
   filterBy(key) {
-
     this.setState({
-      filterString: key,
       data: this.state.values.filter((data) => { return (data.name.toLowerCase(0).includes(key.toLowerCase(0))) }),
     })
-    console.log(this.state.filterString, this.state.data);
+    console.log(this.state.data);
   }
 
 
