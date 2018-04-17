@@ -9,31 +9,37 @@ class App extends Component {
     super(props);
     this.state={
       
-      data: data,   
+      data: data, 
+      values: data,
+      filterString:'',
       direction : {
         gender: 'asc'
       }
     }
     this.sortBy = this.sortBy.bind(this);
+    this.filterBy = this.filterBy.bind(this);
    }
-
-  
-  // filterBy(values) {
-  //   this.setState({
-  //     data: values,
-  //   })
-  //   console.log('filtered data',this.state.data)
-  // }
 
   sortBy(key){
     this.setState({
-      data: data.sort((a,b) => (
+      
+      data: this.state.data.sort((a,b) => (
         this.state.direction[key] === 'asc' ? a[key] > b[key] : a[key] < b[key])),
         direction:{
           [key] : this.state.direction[key] === 'asc' ? 'desc' : 'asc'
         }
     })
   }
+
+  filterBy(key) {
+
+    this.setState({
+      filterString: key,
+      data: this.state.values.filter((data) => { return (data.name.toLowerCase(0).includes(key.toLowerCase(0))) }),
+    })
+    console.log(this.state.filterString, this.state.data);
+  }
+
 
  
   render() {
@@ -43,7 +49,7 @@ class App extends Component {
           <h1 >Building a DataTable using ReactJS</h1>
           </div>
           <div className="container">
-          <SearchForm data={this.state.data} filterBy={values => this.setState({data:values})}/>
+          <SearchForm filterBy={this.filterBy}/>
           <StudentTable
             data={this.state.data}
             sortBy={this.sortBy}
