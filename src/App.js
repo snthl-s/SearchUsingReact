@@ -7,11 +7,9 @@ import './App.css';
 class App extends Component {
   constructor(props){
     super(props);
-    this.state={
-      
+    this.state={      
       data: data, 
       values: data,
-      filterString:'',
       direction : {
         gender: 'asc'
       }
@@ -37,8 +35,6 @@ class App extends Component {
     })
     console.log(this.state.data);
   }
-
-
  
   render() {
     return (
@@ -47,7 +43,9 @@ class App extends Component {
           <h1 >Building a DataTable using ReactJS</h1>
           </div>
           <div className="container">
-          <SearchForm filterBy={this.filterBy}/>
+          <SearchForm 
+            filterBy={this.filterBy}
+          />
           <StudentTable
             data={this.state.data}
             sortBy={this.sortBy}
